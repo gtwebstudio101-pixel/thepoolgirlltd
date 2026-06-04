@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pool Girl Ltd | Pool Maintenance</title>
+<meta name="description" content="Professional swimming pool maintenance, repairs and hot tub care across Hertfordshire, Bedfordshire, Buckinghamshire, Middlesex & Home Counties.">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+:root{--aqua:#3bbcd4;--aqua-light:#a8e6ef;--navy:#0d3d55;--slate:#2c5f76;--sand:#f5f0e8;--cream:#fdfaf5;--white:#fff;--text-mid:#4a7080;--text-light:#7fa8b8;--transition:0.4s cubic-bezier(0.25,0.46,0.45,0.94);}
+body{font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;background:var(--cream);color:#1a3a4a;overflow-x:hidden;}
+.cursor-ripple{position:fixed;width:20px;height:20px;border-radius:50%;background:rgba(59,188,212,0.25);pointer-events:none;transform:translate(-50%,-50%) scale(0);animation:rippleFade 0.6s ease-out forwards;z-index:9999;}
+@keyframes rippleFade{0%{transform:translate(-50%,-50%) scale(0);opacity:1;}100%{transform:translate(-50%,-50%) scale(4);opacity:0;}}
+.bubbles-bg{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden;}
+.bubble{position:absolute;bottom:-60px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(59,188,212,0.18),rgba(59,188,212,0.04));border:1px solid rgba(59,188,212,0.2);animation:floatUp linear infinite;}
+@keyframes floatUp{0%{transform:translateY(0) scale(1);opacity:0;}10%{opacity:1;}90%{opacity:0.4;}100%{transform:translateY(-110vh) scale(0.8);opacity:0;}}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:80px;background:transparent;transition:var(--transition);}
+nav.scrolled{height:64px;background:rgba(253,250,245,0.95);backdrop-filter:blur(12px);box-shadow:0 4px 30px rgba(13,61,85,0.08);}
+.nav-logo img{height:52px;transition:var(--transition);}
+nav.scrolled .nav-logo img{height:42px;}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-links a{font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:0.88rem;letter-spacing:0.08em;text-transform:uppercase;color:white;text-decoration:none;position:relative;transition:color 0.3s;text-shadow:0 1px 2px rgba(0,0,0,0.2);}
+nav.scrolled .nav-links a{color:var(--navy);text-shadow:none;}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:2px;background:var(--aqua);transition:width 0.3s ease;}
+.nav-links a:hover{color:var(--aqua);}
+.nav-links a:hover::after{width:100%;}
+.nav-cta{background:var(--aqua);color:var(--white)!important;padding:10px 26px;border-radius:50px;font-weight:700!important;letter-spacing:0.06em;transition:background 0.3s,transform 0.2s!important;text-shadow:none!important;}
+nav.scrolled .nav-cta{color:white!important;}
+.nav-cta::after{display:none!important;}
+.nav-cta:hover{background:var(--navy)!important;transform:translateY(-1px);}
+.nav-social{display:flex;align-items:center;gap:12px;}
+.nav-social a,.nav-phone-icon{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.15);transition:all 0.3s ease;text-decoration:none;}
+.nav-social a:hover,.nav-phone-icon:hover{background:var(--aqua);transform:translateY(-2px);}
+.nav-social svg{width:18px;height:18px;fill:white;}
+.nav-phone-icon svg{width:18px;height:18px;stroke:white;fill:none;}
+nav.scrolled .nav-social a,nav.scrolled .nav-phone-icon{background:rgba(13,61,85,0.1);}
+nav.scrolled .nav-social svg{fill:var(--navy);}
+nav.scrolled .nav-phone-icon svg{stroke:var(--navy);}
+nav.scrolled .nav-social a:hover,nav.scrolled .nav-phone-icon:hover{background:var(--aqua);}
+nav.scrolled .nav-social a:hover svg{fill:white;}
+nav.scrolled .nav-phone-icon:hover svg{stroke:white;}
+.nav-right-group{display:flex;align-items:center;gap:12px;}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:4px;}
+.hamburger span{width:24px;height:2px;background:white;border-radius:2px;transition:var(--transition);}
+nav.scrolled .hamburger span{background:var(--navy);}
+.mobile-menu{display:none;position:fixed;top:80px;left:0;right:0;background:var(--cream);border-bottom:1px solid rgba(59,188,212,0.2);padding:24px;z-index:99;flex-direction:column;gap:16px;}
+.mobile-menu a{font-size:1rem;font-weight:500;color:var(--navy);text-decoration:none;padding:12px 0;border-bottom:1px solid rgba(59,188,212,0.1);font-family:'Plus Jakarta Sans',sans-serif;}
+.mobile-menu.open{display:flex;}
+.hero{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:linear-gradient(135deg,rgba(13,61,85,0.4),rgba(13,61,85,0.2));}
+.hero-bg-img{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:1;}
+.hero-bg-img.loaded{animation:heroZoomIn 8s ease-out forwards;}
+@keyframes heroZoomIn{0%{transform:scale(1.08);}100%{transform:scale(1);}}
+.hero-overlay-dark{position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,rgba(13,61,85,0.55),rgba(13,61,85,0.3),rgba(0,0,0,0.2));z-index:2;}
+.hero-wave{position:absolute;bottom:0;left:0;right:0;z-index:3;}
+.hero-content{position:relative;z-index:4;padding:80px 48px;max-width:850px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,0.3);color:white;font-size:0.78rem;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:6px 16px;border-radius:50px;margin-bottom:28px;opacity:0;animation:fadeSlideUp 0.8s 0.3s forwards;}
+.hero-badge span{width:6px;height:6px;background:var(--aqua);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(1.4);}}
+.hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(2.8rem,5vw,4.2rem);line-height:1.2;color:white;margin-bottom:20px;opacity:0;animation:fadeSlideUp 0.8s 0.5s forwards;text-shadow:0 2px 8px rgba(0,0,0,0.2);}
+.hero h1 em{font-style:italic;color:var(--aqua);}
+.hero p{font-size:1.05rem;font-weight:400;color:rgba(255,255,255,0.9);line-height:1.7;margin-bottom:36px;max-width:600px;margin-left:auto;margin-right:auto;opacity:0;animation:fadeSlideUp 0.8s 0.7s forwards;text-shadow:0 1px 3px rgba(0,0,0,0.15);}
+.hero-btns{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeSlideUp 0.8s 0.9s forwards;}
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:var(--aqua);color:var(--white);padding:15px 32px;border-radius:50px;font-weight:700;font-size:0.9rem;letter-spacing:0.04em;text-decoration:none;transition:all 0.3s;box-shadow:0 8px 32px rgba(59,188,212,0.3);font-family:'Plus Jakarta Sans',sans-serif;}
+.btn-primary:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 12px 40px rgba(13,61,85,0.25);}
+.btn-secondary{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,0.15);backdrop-filter:blur(8px);color:white;padding:15px 32px;border-radius:50px;border:1px solid rgba(255,255,255,0.4);font-weight:600;font-size:0.9rem;letter-spacing:0.04em;text-decoration:none;transition:all 0.3s;font-family:'Plus Jakarta Sans',sans-serif;}
+.btn-secondary:hover{background:var(--aqua);border-color:var(--aqua);transform:translateY(-2px);}
+.hero-stats{display:flex;justify-content:center;gap:60px;margin-top:56px;opacity:0;animation:fadeSlideUp 0.8s 1.1s forwards;}
+.stat{text-align:center;}
+.stat strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2.2rem;color:var(--aqua);line-height:1;text-shadow:0 1px 2px rgba(0,0,0,0.1);}
+.stat span{font-size:0.8rem;font-weight:400;color:rgba(255,255,255,0.8);letter-spacing:0.04em;}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(24px);}to{opacity:1;transform:translateY(0);}}
+.trust-bar{position:relative;z-index:5;background:var(--navy);padding:20px 48px;display:flex;align-items:center;justify-content:center;gap:48px;flex-wrap:wrap;}
+.trust-item{display:flex;align-items:center;gap:10px;color:var(--aqua-light);font-size:0.82rem;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;font-family:'Plus Jakarta Sans',sans-serif;}
+.trust-item svg{opacity:0.7;}
+.trust-sep{width:1px;height:24px;background:rgba(255,255,255,0.15);}
+section{position:relative;z-index:1;}
+.container{max-width:1200px;margin:0 auto;padding:0 48px;}
+.services{padding:80px 0;background:var(--white);}
+.services-head{text-align:center;margin-bottom:64px;}
+.section-label{font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--aqua);margin-bottom:12px;font-family:'Plus Jakarta Sans',sans-serif;}
+.section-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);color:var(--navy);line-height:1.2;margin-bottom:20px;}
+.section-sub{font-size:1rem;font-weight:400;color:var(--text-mid);line-height:1.7;max-width:560px;margin:0 auto;font-family:'Plus Jakarta Sans',sans-serif;}
+.service-row{display:flex;align-items:center;gap:60px;margin-bottom:60px;background:var(--cream);border-radius:28px;overflow:hidden;box-shadow:0 10px 30px rgba(13,61,85,0.05);transition:transform 0.3s ease,box-shadow 0.3s ease;}
+.service-row:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(13,61,85,0.1);}
+.service-row:nth-child(even){flex-direction:row-reverse;}
+.service-img{flex:1;min-height:380px;overflow:hidden;}
+.service-img img{width:100%;height:100%;object-fit:cover;transition:transform 0.5s ease;}
+.service-row:hover .service-img img{transform:scale(1.03);}
+.service-content{flex:1;padding:40px 40px 40px 0;}
+.service-row:nth-child(even) .service-content{padding:40px 0 40px 40px;}
+.service-icon-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,188,212,0.1);color:var(--aqua);font-size:0.7rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:5px 12px;border-radius:50px;margin-bottom:16px;font-family:'Plus Jakarta Sans',sans-serif;}
+.service-content h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:var(--navy);margin-bottom:20px;}
+.service-content p{font-size:0.95rem;font-weight:400;color:var(--text-mid);line-height:1.75;margin-bottom:16px;font-family:'Plus Jakarta Sans',sans-serif;}
+.service-content ul{margin:16px 0 20px 20px;list-style:none;}
+.service-content ul li{font-size:0.9rem;font-weight:400;color:var(--text-mid);margin-bottom:8px;display:flex;align-items:center;gap:10px;font-family:'Plus Jakarta Sans',sans-serif;}
+.service-content ul li::before{content:"▹";color:var(--aqua);font-size:0.8rem;}
+.service-price-tag{display:inline-block;background:rgba(59,188,212,0.12);color:var(--aqua);font-weight:700;font-size:0.85rem;padding:8px 20px;border-radius:50px;margin-top:16px;font-family:'Plus Jakarta Sans',sans-serif;}
+.about-strip{padding:100px 0;background:var(--aqua-pale);}
+.about-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+.about-imgs{position:relative;height:500px;}
+.about-img-main{position:absolute;top:0;left:0;width:72%;height:80%;border-radius:20px;object-fit:cover;box-shadow:0 24px 60px rgba(13,61,85,0.15);}
+.about-img-sec{position:absolute;bottom:0;right:0;width:56%;height:55%;border-radius:20px;object-fit:cover;box-shadow:0 16px 40px rgba(13,61,85,0.12);border:4px solid var(--white);}
+.about-badge-float{position:absolute;top:50%;left:60%;transform:translate(-50%,-50%);background:var(--white);border-radius:16px;padding:16px 20px;box-shadow:0 10px 40px rgba(13,61,85,0.15);text-align:center;min-width:130px;z-index:2;}
+.about-badge-float strong{display:block;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:2rem;color:var(--aqua);}
+.about-badge-float span{font-size:0.78rem;font-weight:400;color:var(--text-mid);font-family:'Plus Jakarta Sans',sans-serif;}
+.about-text .section-label{margin-bottom:8px;text-align:left;}
+.about-text .section-title{margin-bottom:20px;text-align:left;}
+.about-text p{font-size:0.97rem;font-weight:400;color:var(--text-mid);line-height:1.75;margin-bottom:16px;font-family:'Plus Jakarta Sans',sans-serif;}
+.quals-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;}
+.qual-tag{background:var(--white);border:1px solid rgba(59,188,212,0.3);color:var(--navy);font-size:0.8rem;font-weight:600;padding:7px 16px;border-radius:50px;display:flex;align-items:center;gap:6px;font-family:'Plus Jakarta Sans',sans-serif;}
+.qual-tag::before{content:'✓';color:var(--aqua);font-weight:700;}
+.gallery-preview{padding:100px 0;background:var(--white);}
+.gallery-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:48px;flex-wrap:wrap;gap:20px;}
+.slider-container{max-width:1000px;margin:0 auto;border-radius:24px;overflow:hidden;box-shadow:0 20px 40px rgba(13,61,85,0.15);}
+.comparison-slider{position:relative;width:100%;overflow:hidden;cursor:ew-resize;}
+.comparison-slider img{width:100%;display:block;pointer-events:none;}
+.comparison-slider .img-before{width:100%;}
+.comparison-slider .img-after{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:left;}
+.comparison-slider .resize{position:absolute;top:0;left:0;width:50%;height:100%;overflow:hidden;transition:width 0.1s ease;}
+.slider-line{position:absolute;top:0;left:50%;width:8px;height:100%;background:white;transform:translateX(-50%);cursor:ew-resize;z-index:10;box-shadow:0 0 12px rgba(0,0,0,0.5);}
+.slider-line::before{content:"";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:40px;height:40px;background:white;border-radius:50%;box-shadow:0 2px 12px rgba(0,0,0,0.3);cursor:ew-resize;z-index:11;}
+.testimonials-section{padding:100px 0;background:var(--sand);}
+.testimonials-section .section-sub{margin:0 auto 56px;text-align:center;}
+.reviews-track-wrap{overflow:hidden;position:relative;}
+.reviews-track-wrap::before,.reviews-track-wrap::after{content:'';position:absolute;top:0;bottom:0;width:80px;z-index:2;}
+.reviews-track-wrap::before{left:0;background:linear-gradient(to right,var(--sand),transparent);}
+.reviews-track-wrap::after{right:0;background:linear-gradient(to left,var(--sand),transparent);}
+.reviews-track{display:flex;gap:28px;animation:scrollLeft 28s linear infinite;width:max-content;}
+.reviews-track:hover{animation-play-state:paused;}
+@keyframes scrollLeft{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.review-card{background:var(--white);border-radius:20px;padding:32px 28px;width:340px;flex-shrink:0;border:1px solid rgba(59,188,212,0.1);}
+.stars{color:#f5c842;font-size:0.9rem;margin-bottom:16px;letter-spacing:2px;}
+.review-card p{font-size:0.93rem;font-weight:400;color:var(--text-mid);line-height:1.7;font-style:italic;margin-bottom:20px;font-family:'Plus Jakarta Sans',sans-serif;}
+.reviewer{display:flex;align-items:center;gap:12px;}
+.reviewer-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--aqua),var(--navy));display:flex;align-items:center;justify-content:center;color:white;font-weight:700;font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;}
+.reviewer strong{display:block;font-size:0.88rem;font-weight:700;color:var(--navy);font-family:'Plus Jakarta Sans',sans-serif;}
+.reviewer span{font-size:0.78rem;font-weight:400;color:var(--text-light);font-family:'Plus Jakarta Sans',sans-serif;}
+.map-section{padding:100px 0;background:var(--white);}
+.map-inner{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.areas-list{display:grid;grid-template-columns:1fr 1fr;gap:8px;list-style:none;margin-bottom:32px;}
+.areas-list li{display:flex;align-items:center;gap:8px;font-size:0.93rem;font-weight:400;color:var(--text-mid);padding:6px 0;border-bottom:1px solid rgba(59,188,212,0.1);font-family:'Plus Jakarta Sans',sans-serif;}
+.areas-list li::before{content:'◈';color:var(--aqua);font-size:0.7rem;}
+.map-frame{border-radius:20px;overflow:hidden;box-shadow:0 20px 60px rgba(13,61,85,0.12);height:400px;}
+.map-frame iframe{width:100%;height:100%;border:none;}
+.contact-form-container{background:var(--cream);border-radius:24px;padding:32px;box-shadow:0 10px 30px rgba(13,61,85,0.08);}
+.contact-form-container h3{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.8rem;color:var(--navy);margin-bottom:8px;}
+.contact-form-container p{color:var(--text-mid);font-size:0.9rem;font-weight:400;margin-bottom:24px;font-family:'Plus Jakarta Sans',sans-serif;}
+.form-group{margin-bottom:20px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.form-group label{display:block;font-size:0.8rem;font-weight:700;color:var(--navy);margin-bottom:6px;letter-spacing:0.03em;font-family:'Plus Jakarta Sans',sans-serif;}
+.form-group input,.form-group textarea{width:100%;padding:12px 16px;border:1px solid rgba(59,188,212,0.3);border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:400;font-size:0.9rem;color:#1a3a4a;background:var(--white);transition:all 0.3s ease;}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--aqua);box-shadow:0 0 0 3px rgba(59,188,212,0.1);}
+.form-group textarea{resize:vertical;min-height:100px;}
+.submit-btn{background:var(--aqua);color:white;border:none;padding:14px 28px;border-radius:50px;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.3s ease;width:100%;font-family:'Plus Jakarta Sans',sans-serif;}
+.submit-btn:hover{background:var(--navy);transform:translateY(-2px);}
+.form-success,.form-error{padding:12px;border-radius:12px;margin-bottom:20px;display:none;font-family:'Plus Jakarta Sans',sans-serif;}
+.form-success{background:#d4edda;color:#155724;}
+.form-error{background:#f8d7da;color:#721c24;}
+.cta-band{padding:80px 48px;background:linear-gradient(135deg,var(--navy),var(--slate));text-align:center;position:relative;overflow:hidden;}
+.cta-band::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;border-radius:50%;background:rgba(59,188,212,0.08);}
+.cta-band::after{content:'';position:absolute;bottom:-100px;left:-60px;width:250px;height:250px;border-radius:50%;background:rgba(59,188,212,0.06);}
+.cta-band h2{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);color:var(--white);margin-bottom:16px;position:relative;z-index:1;}
+.cta-band p{color:var(--aqua-light);margin-bottom:36px;font-size:1rem;font-weight:400;position:relative;z-index:1;font-family:'Plus Jakarta Sans',sans-serif;}
+.cta-band .btn-primary{background:var(--aqua);position:relative;z-index:1;}
+.cta-band .btn-outline{display:inline-flex;align-items:center;gap:10px;color:var(--white);border:2px solid rgba(255,255,255,0.3);padding:15px 32px;border-radius:50px;font-weight:600;font-size:0.9rem;text-decoration:none;transition:all 0.3s;position:relative;z-index:1;font-family:'Plus Jakarta Sans',sans-serif;}
+.cta-band .btn-outline:hover{border-color:var(--aqua);color:var(--aqua);}
+.cta-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);padding:64px 48px 40px;}
+.footer-inner{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+.footer-brand img{height:50px;margin-bottom:16px;}
+.footer-brand p{font-size:0.88rem;font-weight:400;color:var(--text-mid);line-height:1.7;max-width:280px;font-family:'Plus Jakarta Sans',sans-serif;}
+.footer-socials{display:flex;gap:12px;margin-top:20px;}
+.social-btn{width:38px;height:38px;border-radius:50%;background:var(--aqua-pale);display:flex;align-items:center;justify-content:center;color:var(--aqua);text-decoration:none;font-size:0.9rem;font-weight:600;transition:all 0.3s;font-family:'Plus Jakarta Sans',sans-serif;}
+.social-btn:hover{background:var(--aqua);color:white;}
+.footer-col h4{font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:0.82rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--navy);margin-bottom:18px;}
+.footer-col ul{list-style:none;}
+.footer-col ul li{margin-bottom:10px;}
+.footer-col ul a{font-size:0.88rem;font-weight:400;color:var(--text-mid);text-decoration:none;transition:color 0.2s;font-family:'Plus Jakarta Sans',sans-serif;}
+.footer-col ul a:hover{color:var(--aqua);}
+.footer-contact-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:12px;}
+.footer-contact-item svg{flex-shrink:0;margin-top:2px;color:var(--aqua);}
+.footer-contact-item span{font-size:0.88rem;font-weight:400;color:var(--text-mid);line-height:1.5;font-family:'Plus Jakarta Sans',sans-serif;}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid rgba(59,188,212,0.12);flex-wrap:wrap;gap:12px;}
+.footer-bottom p{font-size:0.8rem;font-weight:400;color:var(--text-light);font-family:'Plus Jakarta Sans',sans-serif;}
+.footer-certs{display:flex;gap:20px;align-items:center;}
+.cert-badge{font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-mid);border:1px solid rgba(59,188,212,0.3);padding:4px 10px;border-radius:4px;font-family:'Plus Jakarta Sans',sans-serif;}
+.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+@media (max-width:1024px){.footer-inner{grid-template-columns:1fr 1fr;}.service-row{flex-direction:column!important;gap:0;}.service-img{width:100%;min-height:280px;}.service-content{padding:32px!important;}.map-inner{grid-template-columns:1fr;gap:40px;}}
+@media (max-width:768px){nav{padding:0 20px;background:rgba(253,250,245,0.95);}nav.scrolled{background:rgba(253,250,245,0.98);}.nav-links{display:none;}.nav-social,.nav-phone-icon{display:flex;}.hamburger{display:flex;}.hamburger span{background:var(--navy);}.hero-content{padding:100px 20px 60px;}.hero-stats{gap:30px;}.hero-stats .stat strong{font-size:1.8rem;}.container{padding:0 20px;}.about-inner{grid-template-columns:1fr;gap:40px;}.about-imgs{height:300px;}.footer-inner{grid-template-columns:1fr;gap:32px;}.trust-bar{padding:16px 20px;gap:24px;}.trust-sep{display:none;}.cta-band{padding:60px 20px;}.form-row{grid-template-columns:1fr;gap:0;}.slider-line::before{width:28px;height:28px;}}
+</style>
+</head>
+<body>
+<div class="bubbles-bg" id="bubblesContainer"></div>
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/02960142d9bdcd1d281ed6fa24d9a86b31fcdc90/img/main%20logo.avif" alt="Logo"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="#testimonials">Testimonials</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+  <div class="nav-right-group">
+    <div class="nav-social">
+      <a href="https://www.facebook.com/people/The-Pool-Girl-Ltd/100092617231326/" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879v-6.99h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.99C18.343 21.128 22 16.991 22 12z"/></svg></a>
+      <a href="https://www.instagram.com/thepoolgirl.ltd" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M12 2c2.717 0 3.056.01 4.122.06 1.065.05 1.79.217 2.428.465.66.254 1.216.598 1.772 1.153.509.5.902 1.105 1.153 1.772.247.637.415 1.363.465 2.428.047 1.066.06 1.405.06 4.122 0 2.717-.01 3.056-.06 4.122-.05 1.065-.218 1.79-.465 2.428a4.883 4.883 0 0 1-1.153 1.772c-.5.509-1.105.902-1.772 1.153-.637.247-1.363.415-2.428.465-1.066.047-1.405.06-4.122.06-2.717 0-3.056-.01-4.122-.06-1.065-.05-1.79-.218-2.428-.465a4.89 4.89 0 0 1-1.772-1.153 4.904 4.904 0 0 1-1.153-1.772c-.247-.637-.415-1.363-.465-2.428C2.013 15.056 2 14.717 2 12c0-2.717.01-3.056.06-4.122.05-1.066.218-1.79.465-2.428a4.88 4.88 0 0 1 1.153-1.772c.5-.509 1.105-.902 1.772-1.153.637-.247 1.363-.415 2.428-.465C8.944 2.013 9.283 2 12 2zm0 5a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm6.5-.25a1.25 1.25 0 1 0-2.5 0 1.25 1.25 0 0 0 2.5 0zM12 9a3 3 0 1 1 0 6 3 3 0 0 1 0-6z"/></svg></a>
+      <a href="https://www.tiktok.com/@thepoolgirlltd" target="_blank"><svg viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 15.58a6.34 6.34 0 0 0 11.14 3.88 6.33 6.33 0 0 0 1.45-4.05V9.69a8.17 8.17 0 0 0 4.77 1.49v-3.4a4.81 4.81 0 0 1-2.77-1.09z"/></svg></a>
+    </div>
+    <a href="tel:07523656790" class="nav-phone-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg></a>
+    <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html">Home</a>
+  <a href="#services">Services</a>
+  <a href="#about">About</a>
+  <a href="gallery.html">Gallery</a>
+  <a href="#testimonials">Testimonials</a>
+  <a href="#contact">Contact Us</a>
+</div>
+<section class="hero">
+  <img class="hero-bg-img" src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/2d7e4253a5195646141556273482f8801e077977/img/main%20hero%20bg.png" alt="Pool" id="heroBgImg">
+  <div class="hero-overlay-dark"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span></span> Certified Pool Specialist · Est 2021</div>
+    <h1>Your Pool, <em>Perfectly</em><br>Maintained</h1>
+    <p>Trusted swimming pool maintenance, repairs and hot tub care across Hertfordshire, Bedfordshire, Buckinghamshire, Middlesex & Home Counties. Prices from just £65.</p>
+    <div class="hero-btns">
+      <a href="#contact" class="btn-primary">Get a Free Quote</a>
+      <a href="#gallery" class="btn-secondary">View Gallery</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><strong>5★</strong><span>Reviews</span></div>
+      <div class="stat"><strong>£5M</strong><span>Insured</span></div>
+      <div class="stat"><strong>3+</strong><span>Years Experience</span></div>
+    </div>
+  </div>
+  <svg class="hero-wave" viewBox="0 0 1440 60" preserveAspectRatio="none" style="height:60px;"><path fill="#0d3d55" d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z"/></svg>
+</section>
+<div class="trust-bar">
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>CIMSPA Endorsed</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Stockwell Safety Trained</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>PWTAG Recognised</div>
+  <div class="trust-sep"></div>
+  <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>Fully Insured to £5M</div>
+</div>
+<section class="services" id="services">
+  <div class="container">
+    <div class="services-head reveal"><div class="section-label">What We Offer</div><h2 class="section-title">Professional Pool Services</h2><p class="section-sub">From regular maintenance to full equipment replacement, we keep your pool in pristine condition all year round.</p></div>
+    <div class="service-row reveal"><div class="service-img"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/de8e23b537a01e39c3c4aee95d6c81b0ed8b3bc8/img/services/Maintenance.avif" alt="Maintenance"></div><div class="service-content"><div class="service-icon-badge">01</div><h3>Maintenance</h3><p>We offer regular and one off maintenance and cleaning of your swimming pool.</p><p>Not only does crystal clear blue water look and feel better, regular maintenance is essential for not only the health of swimmers but for your plant equipment too.</p><p>Well maintained swimming pools have fewer problems therefore tend to need fewer repairs. Our prices are extremely competitive and start from only £65.</p><span class="service-price-tag">From £65</span></div></div>
+    <div class="service-row reveal"><div class="service-img"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/de8e23b537a01e39c3c4aee95d6c81b0ed8b3bc8/img/services/Opening%20%26%20Closing.avif" alt="Opening & Closing"></div><div class="service-content"><div class="service-icon-badge">02</div><h3>Opening & Closing</h3><p>We recommend closing your outdoor swimming pool during the winter months when it's not being used in order to protect your equipment and pipe work from the freezing temperatures.</p><p>Closing your pool for winter means no maintenance saving you money until spring comes, we can then come and transform your pool into crystal clear blue water to be enjoyed for another summer.</p><p>If you do decide to keep your outdoor pool open all year round, please see our maintenance section above.</p></div></div>
+    <div class="service-row reveal"><div class="service-img"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/de8e23b537a01e39c3c4aee95d6c81b0ed8b3bc8/img/services/Pool%20Equipment%20Replacement.avif" alt="Equipment Replacement"></div><div class="service-content"><div class="service-icon-badge">03</div><h3>Pool Equipment Replacement</h3><p>We can source and replace many parts of your pool equipment this includes but isn't limited to:</p><ul><li>Swimming pool geobubble covers</li><li>Pipework and valves</li><li>Sand filters</li><li>Pumps</li></ul></div></div>
+    <div class="service-row reveal"><div class="service-img"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/de8e23b537a01e39c3c4aee95d6c81b0ed8b3bc8/img/services/Hot%20Tub%20Maintenance.avif" alt="Hot Tub"></div><div class="service-content"><div class="service-icon-badge">04</div><h3>Hot Tub Maintenance</h3><p>The Pool Girl is able to carry out general maintenance of your hot tub. This includes water balancing, cleaning of filters, vacuuming etc. We can also carry out a "hot tub flush" to ensure your hot tub is clean from the inside out.</p><p>Please enquire if you would like to know more information.</p></div></div>
+  </div>
+</section>
+<section class="about-strip" id="about">
+  <div class="container">
+    <div class="about-inner">
+      <div class="about-imgs reveal-left"><img class="about-img-main" src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/069b0fd686f1b9d76edc33b368e64b627e32ec32/img/F6A225C4-0ADA-430B-8C43-40F5EC773740.avif" alt="Ellie"><img class="about-img-sec" src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/069b0fd686f1b9d76edc33b368e64b627e32ec32/img/fc47cd_5659ee7aadc54b8aba3d41b1f8224d75~mv2.avif" alt="Pool"><div class="about-badge-float"><strong>5+</strong><span>Years Experience</span></div></div>
+      <div class="about-text reveal-right"><div class="section-label">My Story</div><h2 class="section-title">Passion Turned into Profession</h2><p>It all started in 2021 when I discovered my father was being drastically overcharged for poor pool maintenance. I took matters into my own hands — learned the trade, gained industry qualifications, and founded The Pool Girl Ltd to offer honest, expert service.</p><p>Today, I am CIMSPA-endorsed, PWTAG-recognised as an on-site designated supervisor, and trained alongside Malcolm North of Pool Pros — a specialist with over 35 years of experience. Health, hygiene and value for money are at the heart of everything I do.</p><div class="quals-grid"><span class="qual-tag">On-site Designated Supervisor</span><span class="qual-tag">Stockwell Safety Trained</span><span class="qual-tag">CIMSPA Endorsed</span><span class="qual-tag">PWTAG Certified</span><span class="qual-tag">Fully Insured £5M</span></div></div>
+    </div>
+  </div>
+</section>
+<section class="gallery-preview" id="gallery">
+  <div class="container">
+    <div class="gallery-head reveal"><div><div class="section-label">Our Work</div><h2 class="section-title">Pools We've Transformed</h2></div><a href="gallery.html" class="btn-secondary">View Full Gallery →</a></div>
+    <div class="slider-container reveal"><div class="comparison-slider" id="comparisonSlider"><img class="img-before" src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/75b5e871b25a8e218a2df8ce6639ff454b760865/img/trmetions/tramistions%20img%201%20.jpeg" alt="Before"><div class="resize" id="resizeDiv"><img class="img-after" src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/75b5e871b25a8e218a2df8ce6639ff454b760865/img/trmetions/transmistions%20img%202%20.jpeg" alt="After"></div><div class="slider-line" id="sliderLine"></div></div></div>
+  </div>
+</section>
+<section class="testimonials-section" id="testimonials">
+  <div class="container"><div class="reveal" style="text-align:center"><div class="section-label">Client Reviews</div><h2 class="section-title">What Our Clients Say</h2><p class="section-sub">We're proud of our five-star reputation built on reliability, expertise, and genuine care for every pool we look after.</p></div></div>
+  <div class="reviews-track-wrap"><div class="reviews-track" id="reviewsTrack">
+    <div class="review-card"><div class="stars">★★★★★</div><p>"Ellie has maintained my pool this summer on a fortnightly basis and I would highly recommend her. She found a small split in the pipework causing a leak and repaired it promptly."</p><div class="reviewer"><div class="reviewer-avatar">J</div><div><strong>Jill</strong><span>Pool Owner, Hertfordshire</span></div></div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p>"Having never owned a swimming pool before, I contacted Ellie who came highly recommended. She answered all my questions and put my mind at ease. I don't know where we'd be without her."</p><div class="reviewer"><div class="reviewer-avatar">C</div><div><strong>Claire</strong><span>Pool Owner, Buckinghamshire</span></div></div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p>"We use The Pool Girl on a fortnightly basis for our hot tub. Ellie makes everything look easy when in reality we had numerous problems trying to maintain it ourselves."</p><div class="reviewer"><div class="reviewer-avatar">M</div><div><strong>Melissa</strong><span>Hot Tub Owner</span></div></div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p>"First class and professional service. It is great finally having someone we can rely on to manage and look after our pool. Highly recommend."</p><div class="reviewer"><div class="reviewer-avatar">S</div><div><strong>Sue</strong><span>Pool Owner, Bedfordshire</span></div></div></div>
+    <div class="review-card"><div class="stars">★★★★★</div><p>"Ellie has given us great advice and has come up with solutions which have saved us money. She is extremely reliable and her work is of high quality. We would recommend her to anyone."</p><div class="reviewer"><div class="reviewer-avatar">I</div><div><strong>Ian</strong><span>Pool Owner</span></div></div></div>
+  </div></div>
+</section>
+<section class="map-section" id="contact">
+  <div class="container">
+    <div class="map-inner">
+      <div class="map-text reveal-left"><div class="section-label">Service Area</div><h2 class="section-title">Areas We Cover</h2><p class="section-sub">Based in Chesham, we service pools across the Home Counties. Get in touch to check availability in your area.</p><ul class="areas-list"><li>Hertfordshire</li><li>Bedfordshire</li><li>Buckinghamshire</li><li>Middlesex</li><li>Home Counties</li><li>Chesham &amp; surrounding</li></ul><div style="display:flex;flex-direction:column;gap:12px;margin-bottom:28px;"><a href="tel:07523656790" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:500;"><span style="width:38px;height:38px;background:var(--aqua-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--aqua);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg></span>07523 656790</a><a href="mailto:thepoolgirl.ltd@gmail.com" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font-weight:500;"><span style="width:38px;height:38px;background:var(--aqua-pale);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--aqua);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>thepoolgirl.ltd@gmail.com</a></div><div class="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39720.49569174698!2d-0.6494!3d51.7063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4876468ac9a09543%3A0xb2e6af5da66fe4ea!2sChesham%2C%20UK!5e0!3m2!1sen!2suk!4v1700000000000!5m2!1sen!2suk" allowfullscreen="" loading="lazy" title="Chesham UK"></iframe></div></div>
+      <div class="reveal-right"><div class="contact-form-container"><h3>Send us a Message</h3><p>Fill out the form below and we'll get back to you as soon as possible.</p><div id="formSuccess" class="form-success">✓ Opening your email app...</div><div id="formError" class="form-error">✗ Please fill in all fields correctly.</div><form id="contactForm"><div class="form-row"><div class="form-group"><label>First Name *</label><input type="text" id="firstName" required placeholder="Enter your first name"></div><div class="form-group"><label>Last Name *</label><input type="text" id="lastName" required placeholder="Enter your last name"></div></div><div class="form-group"><label>Email Address *</label><input type="email" id="email" required placeholder="your@email.com"></div><div class="form-group"><label>Your Message *</label><textarea id="message" required placeholder="Tell us about your pool..."></textarea></div><button type="submit" class="submit-btn">Send Message →</button></form></div></div>
+    </div>
+  </div>
+</section>
+<div class="cta-band reveal"><h2>Ready for a Crystal Clear Pool?</h2><p>Weekly, fortnightly or monthly service plans available. Prices from £65.</p><div class="cta-btns"><a href="tel:07523656790" class="btn-primary">Call 07523 656790</a><a href="mailto:thepoolgirl.ltd@gmail.com" class="btn-outline">Send an Email</a></div></div>
+<footer><div class="container"><div class="footer-inner"><div class="footer-brand"><img src="https://raw.githubusercontent.com/gtwebstudio101-pixel/thepoolgirlltd/02960142d9bdcd1d281ed6fa24d9a86b31fcdc90/img/main%20logo.avif" alt="Logo"><p>A trustworthy, certified pool specialist delivering expert maintenance and care across Hertfordshire, Bedfordshire, Buckinghamshire, Middlesex and the Home Counties.</p><div class="footer-socials"><a href="https://www.facebook.com/profile.php?id=100092617231326" class="social-btn">f</a><a href="https://www.instagram.com/thepoolgirl.ltd" class="social-btn">📷</a><a href="https://www.tiktok.com/@thepoolgirlltd" class="social-btn">♪</a></div></div><div class="footer-col"><h4>Services</h4><ul><li><a href="#services">Pool Maintenance</a></li><li><a href="#services">Opening &amp; Closing</a></li><li><a href="#services">Equipment Replacement</a></li><li><a href="#services">Hot Tub Maintenance</a></li></ul></div><div class="footer-col"><h4>Quick Links</h4><ul><li><a href="index.html">Home</a></li><li><a href="#about">About Ellie</a></li><li><a href="gallery.html">Gallery</a></li><li><a href="#testimonials">Testimonials</a></li></ul></div><div class="footer-col"><h4>Contact</h4><div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.01 1.18 2 2 0 012 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg><span><a href="tel:07523656790">07523 656790</a></span></div><div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><span><a href="mailto:thepoolgirl.ltd@gmail.com">thepoolgirl.ltd<br>@gmail.com</a></span></div><div class="footer-contact-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span>Chesham, HP5 3NS<br>Hertfordshire, UK</span></div></div></div><div class="footer-bottom"><p>© 2024 The Pool Girl Ltd. All rights reserved.</p><div class="footer-certs"><span class="cert-badge">CIMSPA</span><span class="cert-badge">PWTAG</span><span class="cert-badge">Stockwell Safety</span></div></div></div></footer>
+<script>
+for(let i=0;i<18;i++){let b=document.createElement('div');b.className='bubble';let s=20+Math.random()*60;b.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;animation-duration:${10+Math.random()*20}s;animation-delay:${Math.random()*15}s;`;document.getElementById('bubblesContainer').appendChild(b);}
+document.addEventListener('click',e=>{let r=document.createElement('div');r.className='cursor-ripple';r.style.left=e.clientX+'px';r.style.top=e.clientY+'px';document.body.appendChild(r);setTimeout(()=>r.remove(),700);});
+let navbar=document.getElementById('navbar');window.addEventListener('scroll',()=>{navbar.classList.toggle('scrolled',window.scrollY>60);});
+let hamburger=document.getElementById('hamburger');let mobileMenu=document.getElementById('mobileMenu');hamburger.addEventListener('click',()=>{mobileMenu.classList.toggle('open');});mobileMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>mobileMenu.classList.remove('open')));
+let heroBg=document.getElementById('heroBgImg');if(heroBg){heroBg.onload=()=>heroBg.classList.add('loaded');if(heroBg.complete)heroBg.classList.add('loaded');}
+let slider=document.getElementById('comparisonSlider');let resizeDiv=document.getElementById('resizeDiv');let sliderLine=document.getElementById('sliderLine');let isDragging=false;
+function updateSlider(e){if(!isDragging)return;let rect=slider.getBoundingClientRect();let x=e.type==='mousemove'||e.type==='touchmove'?(e.clientX||(e.touches?e.touches[0].clientX:0)):rect.left+rect.width/2;let pos=Math.min(Math.max((x-rect.left)/rect.width,0),1);let p=pos*100;resizeDiv.style.width=p+'%';sliderLine.style.left=p+'%';}
+function startDrag(e){isDragging=true;updateSlider(e);e.preventDefault();}
+function stopDrag(){isDragging=false;}
+sliderLine.addEventListener('mousedown',startDrag);window.addEventListener('mousemove',updateSlider);window.addEventListener('mouseup',stopDrag);sliderLine.addEventListener('touchstart',startDrag);window.addEventListener('touchmove',updateSlider);window.addEventListener('touchend',stopDrag);
+slider.addEventListener('click',function(e){let rect=slider.getBoundingClientRect();let x=e.clientX;let pos=Math.min(Math.max((x-rect.left)/rect.width,0),1);let p=pos*100;resizeDiv.style.width=p+'%';sliderLine.style.left=p+'%';});
+let contactForm=document.getElementById('contactForm');let formSuccess=document.getElementById('formSuccess');let formError=document.getElementById('formError');
+if(contactForm){contactForm.addEventListener('submit',function(e){e.preventDefault();let fn=document.getElementById('firstName').value.trim();let ln=document.getElementById('lastName').value.trim();let em=document.getElementById('email').value.trim();let msg=document.getElementById('message').value.trim();if(!fn||!ln||!em||!msg){formError.style.display='block';formSuccess.style.display='none';setTimeout(()=>{formError.style.display='none';},3000);return;}if(!em.includes('@')||!em.includes('.')){formError.style.display='block';formSuccess.style.display='none';setTimeout(()=>{formError.style.display='none';},3000);return;}let ua=navigator.userAgent.toLowerCase();let isMac=/mac|iphone|ipad|ipod/.test(ua);let subject=`Website Enquiry from ${fn} ${ln}`;let body=`Name: ${fn} ${ln}%0A%0AEmail: ${em}%0A%0A--- Message ---%0A%0A${msg}`;if(isMac){window.location.href=`mailto:thepoolgirl.ltd@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;}else{window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=thepoolgirl.ltd@gmail.com&su=${encodeURIComponent(subject)}&body=${body}`,'_blank');}formSuccess.style.display='block';formError.style.display='none';setTimeout(()=>{formSuccess.style.display='none';},5000);});}
+let observer=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.12});document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .service-row').forEach(el=>observer.observe(el));
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{let id=a.getAttribute('href').slice(1);let t=document.getElementById(id);if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}});});
+</script>
+</body>
+</html>
