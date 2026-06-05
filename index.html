@@ -95,11 +95,12 @@ section{position:relative;z-index:1;}
 .section-title{font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.8rem);color:var(--navy);line-height:1.2;margin-bottom:20px;}
 .section-sub{font-size:1rem;font-weight:400;color:var(--text-mid);line-height:1.7;max-width:560px;margin:0 auto;font-family:'Plus Jakarta Sans',sans-serif;}
 
-/* ===== SERVICE ROWS ===== */
+/* ===== SERVICE ROWS — images capped ===== */
 .service-row{display:flex;align-items:stretch;gap:0;margin-bottom:48px;background:var(--cream);border-radius:24px;overflow:hidden;box-shadow:0 8px 24px rgba(13,61,85,0.06);transition:transform 0.3s ease,box-shadow 0.3s ease;}
 .service-row:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(13,61,85,0.1);}
 .service-row:nth-child(even){flex-direction:row-reverse;}
 .service-img{flex:0 0 42%;max-width:42%;overflow:hidden;position:relative;}
+/* KEY FIX: images are fixed height and cover — no giant images */
 .service-img img{width:100%;height:100%;max-height:340px;object-fit:cover;object-position:center;display:block;transition:transform 0.5s ease;}
 .service-row:hover .service-img img{transform:scale(1.04);}
 .service-content{flex:1;padding:36px 40px;display:flex;flex-direction:column;justify-content:center;}
@@ -233,19 +234,18 @@ footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);paddin
   .about-inner{gap:40px;}
 }
 
-/* ===== MOBILE - SOCIAL ICONS VISIBLE IN HEADER ===== */
+/* ===== MOBILE ===== */
 @media (max-width:768px){
+  /* Nav */
   nav{padding:0 16px;}
   nav.scrolled{background:rgba(253,250,245,0.97);}
   .nav-links{display:none;}
   .hamburger{display:flex;}
   .hamburger span{background:white;}
   nav.scrolled .hamburger span{background:var(--navy);}
-  /* SOCIAL ICONS VISIBLE ON MOBILE */
-  .nav-social{display:flex;}
-  .nav-social a{background:rgba(255,255,255,0.2);}
-  nav.scrolled .nav-social a{background:rgba(13,61,85,0.1);}
-  .nav-phone-icon{display:flex;}
+  .nav-social{display:none;}
+
+  /* Hero */
   .hero-content{padding:100px 20px 70px;}
   .hero h1{font-size:2.4rem;}
   .hero p{font-size:0.95rem;}
@@ -253,11 +253,17 @@ footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);paddin
   .hero-btns .btn-primary,.hero-btns .btn-secondary{padding:13px 24px;font-size:0.88rem;width:100%;justify-content:center;}
   .hero-stats{gap:24px;margin-top:40px;}
   .hero-stats .stat strong{font-size:1.8rem;}
+
+  /* Trust bar */
   .trust-bar{padding:14px 16px;gap:12px;justify-content:flex-start;overflow-x:auto;flex-wrap:nowrap;-webkit-overflow-scrolling:touch;}
   .trust-bar::-webkit-scrollbar{height:3px;}
   .trust-sep{display:none;}
   .trust-item{white-space:nowrap;font-size:0.75rem;}
+
+  /* Container */
   .container{padding:0 16px;}
+
+  /* Services */
   .services{padding:56px 0;}
   .services-head{margin-bottom:40px;}
   .service-row{border-radius:18px;margin-bottom:28px;}
@@ -266,6 +272,8 @@ footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);paddin
   .service-content{padding:22px 20px!important;}
   .service-content h3{font-size:1.4rem;margin-bottom:12px;}
   .service-content p{font-size:0.9rem;}
+
+  /* About */
   .about-strip{padding:56px 0;}
   .about-inner{grid-template-columns:1fr;gap:32px;}
   .about-imgs{height:260px;}
@@ -273,22 +281,32 @@ footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);paddin
   .about-img-sec{width:52%;height:52%;}
   .about-badge-float{padding:12px 14px;min-width:100px;}
   .about-badge-float strong{font-size:1.6rem;}
+
+  /* Gallery */
   .gallery-preview{padding:56px 0;}
   .gallery-head{gap:14px;}
   .gallery-head .btn-secondary{padding:11px 20px;font-size:0.85rem;}
   .slider-line::before{width:28px;height:28px;}
   .comparison-slider img{max-height:280px;}
+
+  /* Testimonials */
   .testimonials-section{padding:56px 0;}
   .review-card{width:280px;padding:22px 18px;}
+
+  /* Map / Contact */
   .map-section{padding:56px 0;}
   .map-inner{gap:28px;}
   .areas-list{grid-template-columns:1fr 1fr;}
   .map-frame{height:260px;}
   .contact-form-container{padding:22px 18px;}
   .form-row{grid-template-columns:1fr;gap:0;}
+
+  /* CTA */
   .cta-band{padding:56px 20px;}
   .cta-btns{flex-direction:column;align-items:center;gap:12px;}
   .cta-band .btn-primary,.cta-band .btn-outline{width:100%;max-width:320px;justify-content:center;}
+
+  /* Footer */
   footer{padding:40px 16px 24px;}
   .footer-inner{grid-template-columns:1fr;gap:28px;}
   .footer-certs{gap:12px;flex-wrap:wrap;}
@@ -394,6 +412,7 @@ footer{background:var(--cream);border-top:1px solid rgba(59,188,212,0.15);paddin
     <div class="review-card"><div class="stars">★★★★★</div><p>"We use The Pool Girl on a fortnightly basis for our hot tub. Ellie makes everything look easy when in reality we had numerous problems trying to maintain it ourselves."</p><div class="reviewer"><div class="reviewer-avatar">M</div><div><strong>Melissa</strong><span>Hot Tub Owner</span></div></div></div>
     <div class="review-card"><div class="stars">★★★★★</div><p>"First class and professional service. It is great finally having someone we can rely on to manage and look after our pool. Highly recommend."</p><div class="reviewer"><div class="reviewer-avatar">S</div><div><strong>Sue</strong><span>Pool Owner, Bedfordshire</span></div></div></div>
     <div class="review-card"><div class="stars">★★★★★</div><p>"Ellie has given us great advice and has come up with solutions which have saved us money. She is extremely reliable and her work is of high quality. We would recommend her to anyone."</p><div class="reviewer"><div class="reviewer-avatar">I</div><div><strong>Ian</strong><span>Pool Owner</span></div></div></div>
+    <!-- duplicated for infinite scroll -->
     <div class="review-card"><div class="stars">★★★★★</div><p>"Ellie has maintained my pool this summer on a fortnightly basis and I would highly recommend her. She found a small split in the pipework causing a leak and repaired it promptly."</p><div class="reviewer"><div class="reviewer-avatar">J</div><div><strong>Jill</strong><span>Pool Owner, Hertfordshire</span></div></div></div>
     <div class="review-card"><div class="stars">★★★★★</div><p>"Having never owned a swimming pool before, I contacted Ellie who came highly recommended. She answered all my questions and put my mind at ease. I don't know where we'd be without her."</p><div class="reviewer"><div class="reviewer-avatar">C</div><div><strong>Claire</strong><span>Pool Owner, Buckinghamshire</span></div></div></div>
     <div class="review-card"><div class="stars">★★★★★</div><p>"We use The Pool Girl on a fortnightly basis for our hot tub. Ellie makes everything look easy when in reality we had numerous problems trying to maintain it ourselves."</p><div class="reviewer"><div class="reviewer-avatar">M</div><div><strong>Melissa</strong><span>Hot Tub Owner</span></div></div></div>
